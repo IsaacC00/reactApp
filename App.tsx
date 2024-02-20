@@ -1,7 +1,7 @@
 //comporbar git
 import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View, Image } from 'react-native';
-export default function App() {
 
 //tipos dar valores con lo que quiero trabajar
 //permite trbajar con data primitiva con data nueva creada por el dev
@@ -10,13 +10,43 @@ type gender = "male" | "female" | "no-binario"
 
 interface PersonInterface{
   name:string;
-  lastNmae:string;
+  lastNmae:string; 
   email : string | null;
   age: number;
   gender: gender;
   isActive: boolean;
 
 }
+
+//source
+/**
+ * @description componente funcional
+ * @returns 
+ */
+
+export default function App() {
+
+  const objeto ={
+    "propiedad1":"a",
+    "propiedad2":2,
+    
+  };
+
+  const { propiedad1, propiedad2 }=objeto;
+
+  const [first, setfirst] = useState();
+ 
+  //cracion del objeto 
+  let persona:PersonInterface = {
+    name: "Isaac",
+    lastNmae: "Calderon",
+    email:null,
+    age: 23,
+    gender:"male",
+    isActive: true,
+
+  }
+
   //funcion para aumenta la edad de una persona                si no recive nada spor defecto le pasa 9
   const incrementeAgePerson = (person: PersonInterface, ageNumbre: number = 9) => {
     const newAge = person.age + ageNumbre; 
@@ -32,17 +62,6 @@ interface PersonInterface{
       
     }
     return newPerson;
-  }
-
-  //cracion del objeto 
-  let persona:PersonInterface = {
-    name: "Isaac",
-    lastNmae: "Calderon",
-    email:null,
-    age: 23,
-    gender:"male",
-    isActive: true,
-
   }
 
   console.log(incrementeAgePerson(persona,1));
@@ -69,7 +88,7 @@ interface PersonInterface{
     source={
       {uri:"https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-png-transparent.png"}} 
     />
-
+      
       <Text>{persona.name}</Text>
       <Text>{persona.lastNmae}</Text>
       <Text>{persona.age}</Text>
@@ -98,6 +117,7 @@ const styles = StyleSheet.create({
       color: "#FF8000"
     },
     tinyLogo:{
-      width:"20%",
+      height: 200,
+      width: 200,
     }
   });
