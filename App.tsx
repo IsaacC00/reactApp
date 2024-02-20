@@ -1,7 +1,7 @@
 //comporbar git
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, View, Image } from 'react-native';
+import { Button, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 //tipos dar valores con lo que quiero trabajar
 //permite trbajar con data primitiva con data nueva creada por el dev
@@ -24,7 +24,11 @@ interface PersonInterface{
  * @returns 
  */
 
-export default function App() {
+const App = () => {
+
+  const [count, setCount] = useState(0);
+  const onPress = () => setCount(prevCount => prevCount + 1);
+
 
   const objeto ={
     "propiedad1":"a",
@@ -67,7 +71,9 @@ export default function App() {
   console.log(incrementeAgePerson(persona,1));
   
   return (
+
     <View style={styles.container}>
+    
       <Text
       //importar estilos
       style={styles.text}
@@ -83,11 +89,17 @@ export default function App() {
         color="#841584"
         
       />
-    <Image
-    style={styles.tinyLogo}
-    source={
-      {uri:"https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-png-transparent.png"}} 
-    />
+      
+        
+      <View style={styles.countContainer}>
+        <Text>Count: {count}</Text>
+      </View>
+
+      <TouchableOpacity style={styles.button} onPress={onPress}>
+          <Text>Press Here</Text>
+      </TouchableOpacity>
+    
+
       
       <Text>{persona.name}</Text>
       <Text>{persona.lastNmae}</Text>
@@ -106,8 +118,6 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      width:"100%",
-      height:"100%",
       backgroundColor: '#A59F99',
       alignItems: 'center',
       justifyContent: 'center',
@@ -116,8 +126,15 @@ const styles = StyleSheet.create({
       fontSize: 24,
       color: "#FF8000"
     },
-    tinyLogo:{
-      height: 200,
-      width: 200,
-    }
+    button: {
+      alignItems: 'center',
+      backgroundColor: '#DDDDDD',
+      padding: 10,
+    },
+    countContainer: {
+      alignItems: 'center',
+      padding: 10,
+    },
   });
+
+  export default App;
