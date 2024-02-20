@@ -1,3 +1,4 @@
+//comporbar git
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View, Image } from 'react-native';
 export default function App() {
