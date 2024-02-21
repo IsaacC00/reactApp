@@ -55,14 +55,13 @@ interface PersonInterface{
   //cracion del objeto 
   let persona:PersonInterface = {
     name: "Isaac",
-    lastNmae: "Calderon",
+    lastName: "Calderon",
     email:null,
     age: 23,
     gender:"male",
     isActive: true,
-
   }
-  
+
   //descomposicion de un objeto 
   const {name,lastName} = persona
   console.log(name,lastName);
