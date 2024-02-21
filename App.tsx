@@ -7,12 +7,11 @@ export default function App() {
 
   return (
     <View >
-      <FadeInImage uri={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/132.png'} 
+      <FadeInImage uri={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/5.png'} 
       style={
         {
-          width: 100,
-          height: 100,
-          
+          width: 220,
+          height: 220,
           alignSelf:'center' 
         }
       }/>

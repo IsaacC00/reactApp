@@ -3,3 +3,6 @@ screen es padre de components, todas mis pantallas de mi app, layouts
 themes estilos que encapsulan nuestra aplicacion
 navifator: utilizo path para las aplicaciones: o patrenes de navegacion presion en un boton y me muestra una pantalla
 assests va las fotolo de la app
+
+instalacion de una API axios nos prtmite consumir 
+nos permite validar usuarios, fatos, etc
