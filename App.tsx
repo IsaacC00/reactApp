@@ -1,9 +1,26 @@
 //comporbar git
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-export default function App() {
 
+  //hook per o con useState
+  const useConter = ()=>{
+    const [counter,setCounter] = useState(0)
+  
+    const increase = () => setCounter(counter +1);
+    const decrease = () => setCounter(counter -1);
+    const reset = () => setCounter(0);
+    
+    return{
+      counter,
+      increase,
+      decrease,
+      reset
+    }
+  }
+//hook per o con useState
+  
+export default function App() {
 //tipos dar valores con lo que quiero trabajar
 //permite trbajar con data primitiva con data nueva creada por el dev
 //tipo fr datos esperados
@@ -11,7 +28,7 @@ type gender = "male" | "female" | "no-binario"
 
 interface PersonInterface{
   name:string;
-  lastNmae:string;
+  lastName:string;
   email : string | null;
   age: number;
   gender: gender;
@@ -26,7 +43,7 @@ interface PersonInterface{
     const newPerson: PersonInterface = {
       age:newAge,
       name:person.name,
-      lastNmae:person.lastNmae,
+      lastName:person.lastName,
       email:person.email,
       gender:person.gender,
       isActive:person.isActive
@@ -45,21 +62,57 @@ interface PersonInterface{
     isActive: true,
 
   }
-
+  
+  //descomposicion de un objeto 
+  const {name,lastName} = persona
+  console.log(name,lastName);
   console.log(incrementeAgePerson(persona,1));
   
+  const {counter,increase,decrease,reset} = useConter()
+
+  //para impplementar dos contadores, serrai de la siguiente forma
+  const conterOne = useConter();
+  const conterTwo = useConter(); 
+
   return (
     <View style={styles.container}>
+      <Text>primer counter</Text>
+
+      <Text>{conterOne.counter}</Text>
+      <Button onPress={conterOne.increase}
+        title='+'
+        
+      />
+      <Button onPress={conterOne.decrease}
+        title='-'
+      />
+      <Button onPress={conterOne.reset}
+        title='Reset'
+      />
+      
+      <Text>segundo counter</Text>
+      
+      <Text>{conterTwo.counter}</Text>
+      <Button onPress={conterTwo.increase}
+        title='+'
+        
+      />
+      <Button onPress={conterTwo.decrease}
+        title='-'
+      />
+      <Button onPress={conterTwo.reset}
+        title='Reset'
+      />
+
       <Text
       //importar estilos
       style={styles.text}
-      >Hola Mundo desde react native</Text>
+      >Hola Mundo desde react</Text>
+
       <Button 
         onPress={ () =>{
-          incrementeAgePerson(persona);
           console.log("Ejecutando la funcion de persona ");
-          console.log({persona});
-          
+          console.log(incrementeAgePerson(persona,1));
         }}
         title="Presioname"
         color="#841584"
@@ -68,8 +121,6 @@ interface PersonInterface{
     
     <TouchableOpacity onPress={
       ()=> console.log("Click en Imagen")
-      
-
     }>
 
       <Image
@@ -78,23 +129,22 @@ interface PersonInterface{
           uri: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png'
         }}
       />
-
     </TouchableOpacity>
-
+      
       <Text>{persona.name}</Text>
-      <Text>{persona.lastNmae}</Text>
+      <Text>{persona.lastName}</Text>
       <Text>{persona.age}</Text>
       <Text>{persona.gender ==="male" ? "masculino" : 
         persona.gender === "female" ? "femenino":
           "no binario"
       }</Text>
       <Text>{persona.email}</Text>
-      
+
       <StatusBar style="auto" />
     </View>
   );
 }
-//h+oja de estilos de javascript
+//hoja de estilos de javascript
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -113,5 +163,5 @@ const styles = StyleSheet.create({
       width:100,
       height:100,
       marginVertical: 20
-    }
+    },
   });
