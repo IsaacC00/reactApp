@@ -1,6 +1,6 @@
 //comporbar git
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View, Image } from 'react-native';
+import { Button, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 export default function App() {
 
 //tipos dar valores con lo que quiero trabajar
@@ -53,7 +53,7 @@ interface PersonInterface{
       //importar estilos
       style={styles.text}
       >Hola Mundo desde react native</Text>
-      <Button
+      <Button 
         onPress={ () =>{
           incrementeAgePerson(persona);
           console.log("Ejecutando la funcion de persona ");
@@ -64,11 +64,21 @@ interface PersonInterface{
         color="#841584"
         
       />
-    <Image
-    style={styles.tinyLogo}
-    source={
-      {uri:"https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-png-transparent.png"}} 
-    />
+    
+    <TouchableOpacity onPress={
+      ()=> console.log("Click en Imagen")
+      
+
+    }>
+
+      <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png'
+        }}
+      />
+
+    </TouchableOpacity>
 
       <Text>{persona.name}</Text>
       <Text>{persona.lastNmae}</Text>
@@ -95,9 +105,12 @@ const styles = StyleSheet.create({
     },
     text:{
       fontSize: 24,
-      color: "#FF8000"
+      color: "#841584",
+      marginBottom: 10
     },
     tinyLogo:{
-      width:"20%",
+      width:100,
+      height:100,
+      marginVertical: 20
     }
   });
