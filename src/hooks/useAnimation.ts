@@ -2,6 +2,7 @@ import { useRef } from "react"
 import { Animated } from "react-native"
 
 export const useAnimation = () => {
+        
     const opacity = useRef(new Animated.Value(0)).current;
     const position = useRef(new Animated.Value(0)).current;
 

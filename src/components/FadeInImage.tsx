@@ -6,7 +6,7 @@ import { useAnimation } from "../hooks/useAnimation";
 interface Props{
     uri:string;
     //trbajamos con todoas las propeidad de estilos de imagen 
-    style:StyleProp<ImageStyle>
+    style?:StyleProp<ImageStyle>;
 }
 
 export const FadeInImage = ({uri,style}:Props)=>{
@@ -23,7 +23,6 @@ export const FadeInImage = ({uri,style}:Props)=>{
     //parar al moemento de no haber inernet 
     //no renderizar al momento que no tenemos internet
     //contemplamos el error
- 
     const onError = (err: NativeSyntheticEvent<ImageErrorEventData>) =>{
         console.warn({err});
         setIsLoading(false);
@@ -31,7 +30,12 @@ export const FadeInImage = ({uri,style}:Props)=>{
 
     return (
         <View
-            style={{justifyContent:"center", alignItems:"center"}}
+            style={{
+                justifyContent:"center", 
+                alignItems:"center",
+                ...style as any,
+            }}
+                
         >
             {
                 isLoading 
@@ -48,9 +52,7 @@ export const FadeInImage = ({uri,style}:Props)=>{
             style={{...style as any, 
             opacity
             }}/>
-
         </View>
-
     );
 
         
