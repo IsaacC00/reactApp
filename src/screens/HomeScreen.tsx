@@ -14,6 +14,7 @@ export const HomeScreen = () => {
         <>
             <Image
                 source={require('../assets/pokebola.png')}
+                style={globalStyles.pokebolaBG}
             />
             <View
                 style={{ alignItems: 'center' }}>
