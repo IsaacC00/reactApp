@@ -37,7 +37,9 @@ export const PokemonCard = ({ pokemon }: Props) => {
             activeOpacity={0.9}
             onPress={() => { }} >
             <View
-                style={{...styles.cardContainer, width: windowWidth * 0.4}}>
+                style={{...styles.cardContainer, width: windowWidth * 0.4,
+                backgroundColor: bgColor
+                }}>
                     {/* contenedor del texto */}
                 <View style={{backgroundColor: 'blue'}}>
                     <Text>
@@ -45,11 +47,13 @@ export const PokemonCard = ({ pokemon }: Props) => {
                         {'\n#' + pokemon.id}
                     </Text>
                 </View>
-                <View>
+                <View style={styles.pokeContainer} >
                     <Image
+                        style={styles.pokebola}
                         source={require('../assets/pokebola-blanca.png')} />
                 </View>
                 <FadeInImage
+                     style={styles.pokemonImage}
                     uri={pokemon.picture}
                 />
             </View>
@@ -73,5 +77,35 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+    },
+    name:{
+        color: "#ffff",
+        fontSize: 20,
+        fontWeight: "bold",
+        top: 20,
+        left:10,
+    },
+    pokebola:{
+        width: 100,
+        height: 100,
+        position: "absolute",
+        right: -25,
+        bottom: -25
+    },
+    pokeContainer:{
+        width: 100,
+        height: 120,
+        position: "absolute",
+        right: 0,
+        bottom: 0,
+        overflow: "hidden",
+        opacity: 0.5
+    },
+    pokemonImage:{
+        width: 100,
+        height: 120,
+        position: "absolute",
+        right: -8,
+        bottom: -5  
     }
 })
