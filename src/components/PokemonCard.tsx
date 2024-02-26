@@ -1,66 +1,69 @@
 import { TouchableOpacity, View, Text, Image, StyleSheet, Dimensions } from "react-native";
-import { SimplePokemon } from "../interfaces/Pokemon.interface";
+import { SimplePokemon } from '../interfaces/Pokemon.interface';
 import { FadeInImage } from "./FadeInImage";
-import ImageColor from 'react-native-image-colors';
 import { useEffect, useRef, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-
-
+import ImageColors from "react-native-image-colors";
+import { useNavigation } from "@react-navigation/core";
 interface Props {
     pokemon: SimplePokemon
 }
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeigth = Dimensions.get('window').height;
 
 export const PokemonCard = ({ pokemon }: Props) => {
     const [bgColor, setbgColor] = useState('gray');
-    const isMounted =  useRef(true);
+    const isMounted = useRef(true);
     const navigation = useNavigation();
 
-
     useEffect(() => {
-        ImageColor.getColors(pokemon.picture, {fallback: "gray"})
-        .then( colors=>{
-            if(!isMounted.current) return;
-            (colors.platform === "android") && setbgColor(colors.dominant || "gray");
-            (colors.platform === "ios") && setbgColor(colors.background || "gray");   
-        }   
-        )
-      return () => {
-        
-      }
+        ImageColors.getColors(pokemon.picture, { fallback: '#000000' })
+            .then(colors => {
+                if (!isMounted.current) return;
+                (colors.platform === 'android') ? setbgColor(colors.dominant || '#000000')
+                    : (colors.platform === 'ios') ? setbgColor(colors.background || '#000000')
+                        : setbgColor('grey')
+            }
+            )
+        return () => {
+            isMounted.current = false;
+        }
     }, [])
 
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() => { }} >
+            onPress={
+                () => navigation.navigate('PokemonScreen', {
+                simplePokemon: pokemon,
+                color: bgColor
+            })
+            } >
             <View
-                style={{...styles.cardContainer, width: windowWidth * 0.4,
-                backgroundColor: bgColor
+                style={{
+                    ...styles.cardContainer,
+                    width: windowWidth * 0.4,
+                    backgroundColor: bgColor
                 }}>
-                    {/* contenedor del texto */}
-                <View style={{backgroundColor: 'blue'}}>
-                    <Text>
+                {/* contenedor del texto */}
+                <View>
+                    <Text style={styles.name} >
                         {pokemon.name}
                         {'\n#' + pokemon.id}
                     </Text>
                 </View>
-                <View style={styles.pokeContainer} >
+                <View style={styles.pokebolalaContainer}>
                     <Image
-                        style={styles.pokebola}
-                        source={require('../assets/pokebola-blanca.png')} />
+                        source={require('../assets/pokebola-blanca.png')}
+                        style={styles.pokebola} />
                 </View>
                 <FadeInImage
-                     style={styles.pokemonImage}
+                    style={styles.pokemonImage}
                     uri={pokemon.picture}
                 />
             </View>
         </TouchableOpacity>
     )
 }
-
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -70,42 +73,43 @@ const styles = StyleSheet.create({
         marginBottom: 25,
         borderRadius: 10,
         shadowColor: "#000",
-        shadowOffset:{
-            width:0,
+        shadowOffset: {
+            width: 0,
             height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
     },
-    name:{
-        color: "#ffff",
+    name: {
+        color: '#ffff',
         fontSize: 20,
-        fontWeight: "bold",
+        fontWeight: 'bold',
         top: 20,
-        left:10,
+        left: 10,
     },
-    pokebola:{
+    pokebola: {
         width: 100,
         height: 100,
-        position: "absolute",
+        position: 'absolute',
         right: -25,
         bottom: -25
     },
-    pokeContainer:{
+    pokebolalaContainer: {
         width: 100,
-        height: 120,
-        position: "absolute",
-        right: 0,
+        height: 100,
+        position: 'absolute',
         bottom: 0,
-        overflow: "hidden",
+        right: 0,
+        overflow: 'hidden',
         opacity: 0.5
     },
-    pokemonImage:{
-        width: 100,
+    pokemonImage: {
+        width: 120,
         height: 120,
-        position: "absolute",
+        position: 'absolute',
         right: -8,
-        bottom: -5  
+        bottom: -5
+
     }
 })
