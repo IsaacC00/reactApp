@@ -4,10 +4,9 @@ import { Navigator } from './src/navigator/Navigator';
 export default function App() {
   return (
     //navigator
-    <NavigationContainer
-    
-    >
+    <NavigationContainer>
       <Navigator/>
+      {/* //todo tabs */}
     </NavigationContainer>
   );
 }
