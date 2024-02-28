@@ -5,7 +5,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { FadeInImage } from "../components/FadeInImage";
 import { usePokemon } from "../hooks/usePokemon";
-import { PokemonDetail } from "../components/PokemonDetails";
+import { PokemonDetail } from "../components/PokemonDetail";
+import { PokeballLoading } from "../components/PokeballLoading";
 
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> { };
 export const PokemonScreen = ({ navigation, route }: Props) => {
@@ -23,9 +24,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
           style={{ ...styles.backButton, top: top + 5 }}>
           <Icon name="arrow-back-outline" color={'white'} size={35} />
         </TouchableOpacity>
-      <Text style={{
-        ...styles.pokemonName, top: top + 40
-      }}>
+      <Text style={{  ...styles.pokemonName, top: top + 40 }}>
         {name + '\n'}# {id}
         </Text>
         <Image source={require('../assets/pokebola-blanca.png')} 
@@ -37,7 +36,8 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
         isLoading
         ?
         <View style={styles.loadingIndicator}>
-          <ActivityIndicator color={color} size={50}/>
+          {/* <ActivityIndicator color={color} size={50}/> */}
+          <PokeballLoading/>
         </View>
         :
         <PokemonDetail pokemon={pokemon}/>
